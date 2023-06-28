@@ -1,5 +1,7 @@
 # VSCode Create Test File Extension
 
+** This is a fork of https://github.com/paul-mannino/vscode-create-test-file **
+
 This is an extension that adds a command for create a test file with a name and path inferred from a currently
 open file (or one selected file from the sidebar).
 
