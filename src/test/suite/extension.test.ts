@@ -21,17 +21,17 @@ suite('Extension Test Suite', () => {
 		test('remaps windows path if mapping argument provided', () => {
 			const srcPath = '/c:/Users/bob/code/app/Foo.cs';
 			const nameTemplate = 'Test{filename}';
-			const pathMapper = { pathPattern: 'app(/?.*)', testFilePath: 'spec$1' };
+			const pathMapper = { pathPattern: 'app(/?.*)', testFilePathPattern: 'spec$1' };
 
 			const expected = '/c:/Users/bob/code/spec/TestFoo.cs';
 			assert.equal(expected, testPath(srcPath, nameTemplate, pathMapper));
 		});
 
 		test('supports remaps relative to project folder', () => {
-			const srcPath = '/home/marlen/vscode-create-test-file/data/examples/example.rb';
+			const srcPath = '/home/user-name/vscode-create-test-file/data/examples/example.rb';
 			const nameTemplate = '{filename}_spec';
-			const pathMapper = { pathPattern: '(/home/marlen/vscode-create-test-file)/?(.*)', testFilePath: '$1/spec/$2' };
-			const expected = '/home/marlen/vscode-create-test-file/spec/data/examples/example_spec.rb';
+			const pathMapper = { pathPattern: '(/home/user-name/vscode-create-test-file)/?(.*)', testFilePathPattern: '$1/spec/$2' };
+			const expected = '/home/user-name/vscode-create-test-file/spec/data/examples/example_spec.rb';
 			assert.equal(expected, testPath(srcPath, nameTemplate, pathMapper));
 		});
 	});

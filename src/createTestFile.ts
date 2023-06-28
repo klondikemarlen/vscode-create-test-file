@@ -45,7 +45,7 @@ function inferTestUri(srcUri: vscode.Uri): Thenable<vscode.Uri> {
 
 interface PathMap {
     pathPattern: string;
-    testFilePath: string;
+    testFilePathPattern: string;
 }
 
 function destPath(srcPath: string, pathMap: PathMap): string {
@@ -55,7 +55,7 @@ function destPath(srcPath: string, pathMap: PathMap): string {
         throw new Error('pathMap does not match provided path');
     }
 
-    const destPattern = pathMap.testFilePath;
+    const destPattern = pathMap.testFilePathPattern;
     return srcPath.replace(matcher, destPattern);
 }
 

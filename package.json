@@ -65,7 +65,7 @@
             "type": "object",
             "properties": {
               "pathPattern": "string",
-              "testFilePath": "string"
+              "testFilePathPattern": "string"
             }
           }
         },
