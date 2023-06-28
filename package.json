@@ -3,6 +3,7 @@
   "displayName": "Create Test File",
   "description": "Find or create empty test file with inferred location",
   "version": "0.0.1",
+  "publisher": "klondikemarlen",
   "engines": {
     "vscode": "^1.79.0"
   },

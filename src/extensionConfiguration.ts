@@ -7,7 +7,7 @@ interface IConfig {
 const DEFAULT_CONFIG: IConfig = {
     nameTemplate: '{filename}_spec',
     locationMaps: []
-}
+};
 
 export class ExtensionConfiguration {
     languageConfiguration: any;

@@ -4,7 +4,7 @@ import * as assert from 'assert';
 // as well as import your extension to test it
 import * as vscode from 'vscode';
 // import * as myExtension from '../../extension';
-import { testPath } from '../createTest';
+import { testPath } from '../../createTestFile';
 
 suite('Extension Test Suite', () => {
 	vscode.window.showInformationMessage('Start all tests.');
@@ -16,8 +16,8 @@ suite('Extension Test Suite', () => {
 
 	//////////////////////////////////////////////////////////////////////////////////
 	// TODO: migrate files such that these tests pass
-	describe('testPath', () => {
-		it('creates test file from windows path in same folder', () => {
+	suite('testPath', () => {
+		test('creates test file from windows path in same folder', () => {
 			const srcPath = '/c:/Users/bob/code/app/foo.rb';
 			const nameTemplate = '{filename}_spec';
 
@@ -25,7 +25,7 @@ suite('Extension Test Suite', () => {
 			assert.equal(expected, testPath(srcPath, nameTemplate));
 		});
 
-		it('remaps windows path if mapping argument provided', () => {
+		test('remaps windows path if mapping argument provided', () => {
 			const srcPath = '/c:/Users/bob/code/app/Foo.cs';
 			const nameTemplate = 'Test{filename}';
 			const pathMapper = { pathPattern: 'app(/?.*)', testFilePath: 'spec$1' };

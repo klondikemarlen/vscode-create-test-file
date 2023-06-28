@@ -2,7 +2,7 @@ import * as vscode from 'vscode';
 import * as path from 'path';
 import { ExtensionConfiguration } from './extensionConfiguration';
 
-export function createTest(srcUri: vscode.Uri): Thenable<vscode.Uri> {
+export function createTestFile(srcUri: vscode.Uri): Thenable<vscode.Uri> {
     return inferTestUri(srcUri).then(uri => {
         let we = new vscode.WorkspaceEdit();
         we.createFile(uri, { overwrite: false });
@@ -16,7 +16,7 @@ export function createTest(srcUri: vscode.Uri): Thenable<vscode.Uri> {
     });
 }
 
-export function findTest(srcUri: vscode.Uri): Thenable<vscode.TextDocument> {
+export function findTestFile(srcUri: vscode.Uri): Thenable<vscode.TextDocument> {
     return inferTestUri(srcUri).then(uri => {
         return vscode.workspace.openTextDocument(uri);
     });
