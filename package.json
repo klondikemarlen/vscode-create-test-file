@@ -4,6 +4,7 @@
   "description": "Find or create empty test file with inferred location",
   "version": "0.0.1",
   "publisher": "klondikemarlen",
+  "repository": "https://github.com/klondikemarlen/vscode-create-test-file",
   "engines": {
     "vscode": "^1.79.0"
   },
