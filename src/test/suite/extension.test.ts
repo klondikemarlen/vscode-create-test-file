@@ -9,13 +9,6 @@ import { testPath } from '../../createTestFile';
 suite('Extension Test Suite', () => {
 	vscode.window.showInformationMessage('Start all tests.');
 
-	test('Sample test', () => {
-		assert.strictEqual(-1, [1, 2, 3].indexOf(5));
-		assert.strictEqual(-1, [1, 2, 3].indexOf(0));
-	});
-
-	//////////////////////////////////////////////////////////////////////////////////
-	// TODO: migrate files such that these tests pass
 	suite('testPath', () => {
 		test('creates test file from windows path in same folder', () => {
 			const srcPath = '/c:/Users/bob/code/app/foo.rb';
@@ -31,6 +24,14 @@ suite('Extension Test Suite', () => {
 			const pathMapper = { pathPattern: 'app(/?.*)', testFilePath: 'spec$1' };
 
 			const expected = '/c:/Users/bob/code/spec/TestFoo.cs';
+			assert.equal(expected, testPath(srcPath, nameTemplate, pathMapper));
+		});
+
+		test('supports remaps relative to project folder', () => {
+			const srcPath = '/home/marlen/vscode-create-test-file/data/examples/example.rb'
+			const nameTemplate = '{filename}_spec';
+			const pathMapper = { pathPattern: '(.*)', testFilePath: 'spec/$1' };
+			const expected = '/home/marlen/vscode-create-test-file/spec/data/examples/example.rb';
 			assert.equal(expected, testPath(srcPath, nameTemplate, pathMapper));
 		});
 	});
