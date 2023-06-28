@@ -49,25 +49,14 @@ interface PathMap {
 }
 
 function destPath(srcPath: string, pathMap: PathMap): string {
-    let matcher = new RegExp(pathMap.pathPattern);
-    let match = srcPath.match(matcher);
+    const matcher = new RegExp(pathMap.pathPattern);
+    const match = srcPath.match(matcher);
     if (!match) {
         throw new Error('pathMap does not match provided path');
     }
 
-    let pathSegments = srcPath.split(match[0]);
-
-    let destPattern = pathMap.testFilePath;
-    for (let i = 1; i < match.length; i++) {
-        let replaceText = match[i];
-        if (typeof replaceText === 'undefined') {
-            replaceText = "";
-        }
-        destPattern = destPattern.replace(`\$${1}`, replaceText);
-    }
-
-    pathSegments.splice(1, 0, destPattern);
-    return pathSegments.join('');
+    const destPattern = pathMap.testFilePath;
+    return srcPath.replace(matcher, destPattern);
 }
 
 function matchingPathMap(srcUri: vscode.Uri, settings: ExtensionConfiguration): PathMap | undefined {

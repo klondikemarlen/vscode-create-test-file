@@ -28,10 +28,10 @@ suite('Extension Test Suite', () => {
 		});
 
 		test('supports remaps relative to project folder', () => {
-			const srcPath = '/home/marlen/vscode-create-test-file/data/examples/example.rb'
+			const srcPath = '/home/marlen/vscode-create-test-file/data/examples/example.rb';
 			const nameTemplate = '{filename}_spec';
-			const pathMapper = { pathPattern: '(.*)', testFilePath: 'spec/$1' };
-			const expected = '/home/marlen/vscode-create-test-file/spec/data/examples/example.rb';
+			const pathMapper = { pathPattern: '(/home/marlen/vscode-create-test-file)/?(.*)', testFilePath: '$1/spec/$2' };
+			const expected = '/home/marlen/vscode-create-test-file/spec/data/examples/example_spec.rb';
 			assert.equal(expected, testPath(srcPath, nameTemplate, pathMapper));
 		});
 	});
