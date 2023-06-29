@@ -36,11 +36,19 @@ export function testPath(srcPath: string,
 }
 
 function inferTestUri(srcUri: vscode.Uri): Thenable<vscode.Uri> {
-    const absolutePath = srcUri.path;
     return getExtensionSettings(srcUri).then((settings: ExtensionConfiguration) => {
         const nameTemplate = settings.get('nameTemplate');
-        const pathMapper = matchingPathMap(absolutePath, settings);
-        return srcUri.with({ path: testPath(absolutePath, nameTemplate, pathMapper) });
+
+        const absolutePath = srcUri.path;
+        const relativePath = vscode.workspace.asRelativePath(absolutePath);
+        const replaceLastMatchPattern = new RegExp(relativePath + '$');
+        const workspaceRootPath = absolutePath.replace(replaceLastMatchPattern, '');
+
+        const pathMapper = matchingPathMap(relativePath, settings);
+        const replacedPath = testPath(relativePath, nameTemplate, pathMapper);
+
+        const path = workspaceRootPath + replacedPath;
+        return srcUri.with({ path });
     });
 }
 
