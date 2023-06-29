@@ -36,10 +36,11 @@ export function testPath(srcPath: string,
 }
 
 function inferTestUri(srcUri: vscode.Uri): Thenable<vscode.Uri> {
+    const absolutePath = srcUri.path;
     return getExtensionSettings(srcUri).then((settings: ExtensionConfiguration) => {
         const nameTemplate = settings.get('nameTemplate');
-        const pathMapper = matchingPathMap(srcUri, settings);
-        return srcUri.with({ path: testPath(srcUri.path, nameTemplate, pathMapper) });
+        const pathMapper = matchingPathMap(absolutePath, settings);
+        return srcUri.with({ path: testPath(absolutePath, nameTemplate, pathMapper) });
     });
 }
 
@@ -59,12 +60,11 @@ function destPath(srcPath: string, pathMap: PathMap): string {
     return srcPath.replace(matcher, destPattern);
 }
 
-function matchingPathMap(srcUri: vscode.Uri, settings: ExtensionConfiguration): PathMap | undefined {
-    let relativePath = vscode.workspace.asRelativePath(srcUri);
+function matchingPathMap(srcPath: string, settings: ExtensionConfiguration): PathMap | undefined {
     let pathMaps = settings.get('pathMaps') as Array<PathMap>;
     for (let pathMap of pathMaps) {
         let matcher = new RegExp(pathMap.pathPattern);
-        if (relativePath.match(matcher)) {
+        if (srcPath.match(matcher)) {
             return pathMap;
         }
     }
