@@ -19,7 +19,7 @@ Given an absolute path, a path pattern and a test file pattern, you get `absolut
 
 ## Extension Settings
 
-```json
+```javascript -- instead of json to support comments
 // Basic settings
 "createTestFile.nameTemplate": "{filename}_spec", // If file is named foo.bar, will create test named foo_spec.bar
 "createTestFile.languages": {
