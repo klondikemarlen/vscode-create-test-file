@@ -59,3 +59,14 @@ I'll probably fix this a some point so path patterns default to mutating the pat
 ## Release Notes
 
 See [CHANGELOG](./CHANGELOG.md)
+
+## Development
+
+Generally you would run the project via F5 in VSCode.
+
+Alternatively, see package.json -> scripts other commands.
+- npm run test
+
+TODO: add information on how to publish.
+
+FUTURE: investigate continuous integration and headless testing https://code.visualstudio.com/api/working-with-extensions/continuous-integration#azure-pipelines
