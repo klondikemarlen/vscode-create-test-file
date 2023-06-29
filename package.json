@@ -1,6 +1,6 @@
 {
-  "name": "vscode-create-test-file",
-  "displayName": "Create Test File",
+  "name": "create-test-file",
+  "displayName": "Create Test File at Path",
   "description": "Find or create empty test file with inferred location",
   "version": "1.0.0",
   "publisher": "klondikemarlen",
