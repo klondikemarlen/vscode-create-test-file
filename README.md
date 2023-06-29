@@ -17,6 +17,8 @@ path mappers if you have multiple conventions for where you create tests.
 Full path mutation support via JS regex replace.
 Given an absolute path, a path pattern and a test file pattern, you get `absolutePath.replace(pathPattern, testFilePattern)`; anything you can write via https://regex101.com/ will work.
 
+If you want workspace specific behavior, this is built in to VSCode itself. You can activate this feature by editing appropriate settings in the project relative `./.vscode/settings.json` file.
+
 ## Extension Settings
 
 ```javascript -- instead of json to support comments
