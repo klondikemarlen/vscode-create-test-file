@@ -67,6 +67,11 @@ Generally you would run the project via F5 in VSCode.
 Alternatively, see package.json -> scripts other commands.
 - npm run test
 
+### File Access in Tests
+
+The test config opens the app with `out/test/example-workspace/` as the default workspace.
+File manipulation tests can be performed in this folder.
+
 TODO: add information on how to publish.
 
 FUTURE: investigate continuous integration and headless testing https://code.visualstudio.com/api/working-with-extensions/continuous-integration#azure-pipelines
