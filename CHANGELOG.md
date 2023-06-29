@@ -6,6 +6,10 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 ## [Unreleased]
 
+## [1.1.0] - 2023-06-28
+
+- Fix absolute path replacement.
+
 ## [1.0.0] - 2023-06-28
 
 - Added support for multiple pattern group replacements so you can mutate all paths and inject a test namespace.
