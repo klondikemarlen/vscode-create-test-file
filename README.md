@@ -44,20 +44,7 @@ For pattern replacement conventions see [Specifying a string as the replacement]
 
 ## Known Issues
 
-The path replacement requires that you supply a matcher against the absolute path if you want to match all paths.
-
-Path patterns that want to inject a pattern for all files, need to use the full absolute path.
-e.g.
-```json
-{
-    "pathPattern": "(/home/user-name/vscode-create-test-file)/?(.*)",
-     "testFilePathPattern": "$1/spec/$2"
-}
-```
-
-Would convert `/home/user-name/vscode-create-test-file/data/examples/example.rb` to `/home/user-name/vscode-create-test-file/spec/data/examples/example_spec.rb'`
-
-I'll probably fix this a some point so path patterns default to mutating the path relative to the project root.
+Filename replacement does not support full regex replacement.
 
 ## Release Notes
 
@@ -72,9 +59,17 @@ Alternatively, see package.json -> scripts other commands.
 
 ### File Access in Tests
 
-The test config opens the app with `./tmp/example-workspace/` as the default workspace.
+The test config opens the app with `./out/tmp/example-workspace/` as the default workspace.
 File manipulation tests can be performed in this folder. The directory is copied from the project `./src/test/example-workspace` directory as part of the `npm run test` command.
 
-TODO: add information on how to publish.
-
 FUTURE: investigate continuous integration and headless testing https://code.visualstudio.com/api/working-with-extensions/continuous-integration#azure-pipelines
+
+### Publishing
+
+See https://code.visualstudio.com/api/working-with-extensions/publishing-extension for full details. The following is a quick refresher:
+
+1. (as needed) `npm install -g @vscode/vsce`
+2. `vsce package`
+3. `vsce publish`
+
+> You might need to periodically refresh your azure dev ops api key.

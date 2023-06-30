@@ -6,6 +6,10 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 ## [Unreleased]
 
+## [2.0.0] - 2023-06-30
+
+- Switch from absolute path matching to relative path matching. If you need custom matching behavior in a given project, this is a stock VSCode feature. See [README -> Features](./README.md#features)
+
 ## [1.1.0] - 2023-06-28
 
 - Fix absolute path replacement.
