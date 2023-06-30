@@ -13,8 +13,8 @@ suite('Extension Test Suite', () => {
 		assert.ok(extension !== undefined, "Extension is undefined");
 		const typedExtension = extension as vscode.Extension<any>;
 
-		assert.doesNotThrow(() => {
-			typedExtension.activate();
+		return assert.doesNotThrow(() => {
+			return typedExtension.activate();
 		});
 	});
 });

@@ -10,12 +10,12 @@ const WORKSPACE_ROOT = process.env.workspaceRoot as string;
 
 suite('createTestFile', () => {
 	setup(() => {
-		const testFileExamplePath = path.join(WORKSPACE_ROOT, 'test_example.rb');
+		const testFileExamplePath = path.join(WORKSPACE_ROOT, 'example.test.rb');
 		return fs.unlink(testFileExamplePath, error => null);
 	});
 
 	teardown(() => {
-		const testFileExamplePath = path.join(WORKSPACE_ROOT, 'test_example.rb');
+		const testFileExamplePath = path.join(WORKSPACE_ROOT, 'example.test.rb');
 		return fs.unlink(testFileExamplePath, error => null);
 	});
 
@@ -24,15 +24,13 @@ suite('createTestFile', () => {
 			'createTestFile',
 		);
 
-		config.update('nameTemplate', '{filename}.test').then(() => {
-			console.log("config", config);
-
+		return config.update('nameTemplate', '{filename}.test').then(() => {
 			const examplePath = path.join(WORKSPACE_ROOT, './example.rb');
 			const originalUri = vscode.Uri.file(examplePath);
 
 			return createTestFile(originalUri).then(newUri => {
-				const expected = path.join(WORKSPACE_ROOT, './test_example.rb');
-				assert.equal(expected, newUri.path);
+				const expected = path.join(WORKSPACE_ROOT, './example.test.rb');
+				return assert.equal(expected, newUri.path);
 			});
 		});
 
