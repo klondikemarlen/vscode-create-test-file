@@ -2,8 +2,6 @@
 
 ** This is a fork of https://github.com/paul-mannino/vscode-create-test-file **
 
-Published to https://marketplace.visualstudio.com/items?itemName=klondikemarlen.create-test-file
-
 This is an extension that adds a command for creating a test file, with a given name and path inferred from a currently open file (or one selected file from the sidebar).
 
 For example, if your application code lives under the `app` directory in your workspace and your test code lives under the `spec` folder, you can define rules such that for any file `app/foo/bar/filename.rb`, you will create or open a file with `spec/foo/bar/filename_spec.rb`. These settings can be customized for each filetype, and you may create multiple
@@ -70,3 +68,5 @@ See https://code.visualstudio.com/api/working-with-extensions/publishing-extensi
 3. `vsce publish`
 
 > You might need to periodically refresh your azure dev ops api key.
+
+Published to https://marketplace.visualstudio.com/items?itemName=klondikemarlen.create-test-file
