@@ -4,12 +4,9 @@
 
 Published to https://marketplace.visualstudio.com/items?itemName=klondikemarlen.create-test-file
 
-This is an extension that adds a command for create a test file with a name and path inferred from a currently
-open file (or one selected file from the sidebar).
+This is an extension that adds a command for creating a test file, with a given name and path inferred from a currently open file (or one selected file from the sidebar).
 
-For example, if your application code lives under the `app` directory in your workspace and your test code lives under
-the `spec` folder, you can define rules such that for any file `app/foo/bar/filename.rb`, you will create or open a file
-with `spec/foo/bar/filename_spec.rb`. These settings can be customized for each filetype, and you may create multiple
+For example, if your application code lives under the `app` directory in your workspace and your test code lives under the `spec` folder, you can define rules such that for any file `app/foo/bar/filename.rb`, you will create or open a file with `spec/foo/bar/filename_spec.rb`. These settings can be customized for each filetype, and you may create multiple
 path mappers if you have multiple conventions for where you create tests.
 
 ## Features
@@ -44,7 +41,7 @@ For pattern replacement conventions see [Specifying a string as the replacement]
 
 ## Known Issues
 
-Filename replacement does not support full regex replacement.
+While path replacement has full regex support, filename replacement **does not** support full regex replacement.
 
 ## Release Notes
 
