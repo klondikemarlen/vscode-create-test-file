@@ -22,6 +22,9 @@ async function main() {
 				workspacePath,
 				'--disable-extensions'
 			],
+			extensionTestsEnv: {
+				workspaceRoot: workspacePath,
+			}
 		});
 	} catch (err) {
 		console.error('Failed to run tests', err);

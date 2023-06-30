@@ -6,7 +6,7 @@ import * as fs from 'fs';
 
 import { createTestFile, testPath } from '../../createTestFile';
 
-const WORKSPACE_ROOT = path.resolve(__dirname, '../../tmp/example-workspace');
+const WORKSPACE_ROOT = process.env.workspaceRoot as string;
 
 suite('createTestFile', () => {
 	setup(() => {
