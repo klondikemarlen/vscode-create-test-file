@@ -6,6 +6,10 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 ## [Unreleased]
 
+## [3.0.0] - 2023-06-30
+
+- Added support for filename extension mutation.
+
 ## [2.0.1] - 2023-06-30
 
 - Improve readme.

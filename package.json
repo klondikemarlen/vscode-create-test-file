@@ -2,7 +2,7 @@
   "name": "create-test-file",
   "displayName": "Create Test File at Path",
   "description": "Find or create empty test file with inferred location",
-  "version": "2.0.1",
+  "version": "3.0.0",
   "publisher": "klondikemarlen",
   "repository": "https://github.com/klondikemarlen/vscode-create-test-file",
   "engines": {
