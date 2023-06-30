@@ -101,7 +101,8 @@
     "lint": "eslint src --ext ts",
     "test": "node ./out/test/runTest.js",
     "clean": "rm -rf ./out",
-    "clean:tmp": "rm -rf ./out/tmp"
+    "clean:tmp": "rm -rf ./out/tmp",
+    "clean:vsix": "rm *.vsix"
   },
   "devDependencies": {
     "@types/vscode": "^1.79.0",
