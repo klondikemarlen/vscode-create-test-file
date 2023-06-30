@@ -9,31 +9,25 @@ import { createTestFile, testPath } from '../../createTestFile';
 const WORKSPACE_ROOT = process.env.workspaceRoot as string;
 
 suite('createTestFile', () => {
-	setup(() => {
-		const testFileExamplePath = path.join(WORKSPACE_ROOT, 'example.test.rb');
-		return fs.unlink(testFileExamplePath, error => null);
-	});
-
-	teardown(() => {
-		const testFileExamplePath = path.join(WORKSPACE_ROOT, 'example.test.rb');
-		return fs.unlink(testFileExamplePath, error => null);
-	});
-
-	test('should create the appropriate a test file', () => {
+	setup(async () => {
 		const config = vscode.workspace.getConfiguration(
 			'createTestFile',
 		);
+		await config.update('nameTemplate', '{filename}.test');
+		await config.update('pathMaps', []);
+		await config.update('languages', {});
 
-		return config.update('nameTemplate', '{filename}.test').then(() => {
-			const examplePath = path.join(WORKSPACE_ROOT, './example.rb');
-			const originalUri = vscode.Uri.file(examplePath);
+		const testFileExamplePath = path.join(WORKSPACE_ROOT, 'example.test.rb');
+		fs.unlink(testFileExamplePath, error => null);
+	});
 
-			return createTestFile(originalUri).then(newUri => {
-				const expected = path.join(WORKSPACE_ROOT, './example.test.rb');
-				return assert.equal(expected, newUri.path);
-			});
-		});
+	test('should create the appropriate a test file', async () => {
+		const examplePath = path.join(WORKSPACE_ROOT, './example.rb');
+		const originalUri = vscode.Uri.file(examplePath);
 
+		const newUri = await createTestFile(originalUri);
+		const expected = path.join(WORKSPACE_ROOT, './example.test.rb');
+		assert.equal(expected, newUri.path);
 	});
 });
 
