@@ -9,25 +9,27 @@ import { createTestFile, testPath } from '../../createTestFile';
 const WORKSPACE_ROOT = process.env.workspaceRoot as string;
 
 suite('createTestFile', () => {
-	setup(async () => {
-		const config = vscode.workspace.getConfiguration(
-			'createTestFile',
-		);
-		await config.update('nameTemplate', '{filename}.test');
-		await config.update('pathMaps', []);
-		await config.update('languages', {});
+	suite('when only the name template is set', () => {
+		setup(async () => {
+			const config = vscode.workspace.getConfiguration(
+				'createTestFile',
+			);
+			await config.update('nameTemplate', '{filename}.test');
+			await config.update('pathMaps', []);
+			await config.update('languages', {});
 
-		const testFileExamplePath = path.join(WORKSPACE_ROOT, 'example.test.rb');
-		fs.unlink(testFileExamplePath, error => null);
-	});
+			const testFileExamplePath = path.join(WORKSPACE_ROOT, 'example.test.rb');
+			fs.unlink(testFileExamplePath, error => null);
+		});
 
-	test('should create the appropriate a test file', async () => {
-		const examplePath = path.join(WORKSPACE_ROOT, './example.rb');
-		const originalUri = vscode.Uri.file(examplePath);
+		test('performs a simple file name replacement', async () => {
+			const examplePath = path.join(WORKSPACE_ROOT, './example.rb');
+			const originalUri = vscode.Uri.file(examplePath);
 
-		const newUri = await createTestFile(originalUri);
-		const expected = path.join(WORKSPACE_ROOT, './example.test.rb');
-		assert.equal(expected, newUri.path);
+			const newUri = await createTestFile(originalUri);
+			const expected = path.join(WORKSPACE_ROOT, './example.test.rb');
+			assert.equal(expected, newUri.path);
+		});
 	});
 });
 
