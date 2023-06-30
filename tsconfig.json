@@ -14,5 +14,8 @@
 		// "noFallthroughCasesInSwitch": true, /* Report errors for fallthrough cases in switch statement. */
 		// "noUnusedParameters": true,  /* Report errors on unused parameters. */
 	},
+	"watchOptions": {
+		"excludeDirectories": ["**/node_modules", "./out"]
+	},
 	"exclude": ["./node_mdules", "./out", "./src/test/example-workspace"],
 }
