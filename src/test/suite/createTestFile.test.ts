@@ -14,7 +14,7 @@ suite('createTestFile', () => {
 			const config = vscode.workspace.getConfiguration(
 				'createTestFile',
 			);
-			await config.update('nameTemplate', '{filename}.test');
+			await config.update('nameTemplate', '{filename}.test.{extension}');
 			await config.update('pathMaps', []);
 			await config.update('languages', {});
 
@@ -38,7 +38,7 @@ suite('createTestFile', () => {
 			const config = vscode.workspace.getConfiguration(
 				'createTestFile',
 			);
-			await config.update('nameTemplate', '{filename}.test');
+			await config.update('nameTemplate', '{filename}.test.{extension}');
 			await config.update('pathMaps', [
 				{
 					"pathPattern": "/?(.*)",
@@ -67,13 +67,13 @@ suite('createTestFile', () => {
 			const config = vscode.workspace.getConfiguration(
 				'createTestFile',
 			);
-			await config.update('nameTemplate', '{filename}.test');
+			await config.update('nameTemplate', '{filename}.test.{extension}');
 			await config.update('pathMaps', []);
 			await config.update('languages', {
 				// eslint-disable-next-line @typescript-eslint/naming-convention
 				"[ruby]": {
 					// eslint-disable-next-line @typescript-eslint/naming-convention
-					"createTestFile.nameTemplate": "{filename}_spec"
+					"createTestFile.nameTemplate": "{filename}_spec.{extension}"
 				}
 			});
 
@@ -97,7 +97,7 @@ suite('createTestFile', () => {
 suite('testPath', () => {
 	test('creates test file from windows path in same folder', () => {
 		const srcPath = '/c:/Users/bob/code/app/foo.rb';
-		const nameTemplate = '{filename}_spec';
+		const nameTemplate = '{filename}_spec.{extension}';
 
 		const expected = '/c:/Users/bob/code/app/foo_spec.rb';
 		assert.equal(expected, testPath(srcPath, nameTemplate));
@@ -105,7 +105,7 @@ suite('testPath', () => {
 
 	test('remaps windows path if mapping argument provided', () => {
 		const srcPath = '/c:/Users/bob/code/app/Foo.cs';
-		const nameTemplate = 'Test{filename}';
+		const nameTemplate = 'Test{filename}.{extension}';
 		const pathMapper = { pathPattern: 'app(/?.*)', testFilePathPattern: 'spec$1' };
 
 		const expected = '/c:/Users/bob/code/spec/TestFoo.cs';
@@ -114,9 +114,17 @@ suite('testPath', () => {
 
 	test('supports remaps relative to project folder', () => {
 		const srcPath = 'data/examples/example.rb';
-		const nameTemplate = '{filename}_spec';
+		const nameTemplate = '{filename}_spec.{extension}';
 		const pathMapper = { pathPattern: '/?(.*)', testFilePathPattern: 'spec/$1' };
 		const expected = 'spec/data/examples/example_spec.rb';
+		assert.equal(expected, testPath(srcPath, nameTemplate, pathMapper));
+	});
+
+	test('supports setting a completely different extension', () => {
+		const srcPath = 'data/examples/example.vue';
+		const nameTemplate = '{filename}.test.js';
+		const pathMapper = { pathPattern: '/?(.*)', testFilePathPattern: 'spec/$1' };
+		const expected = 'spec/data/examples/example.test.js';
 		assert.equal(expected, testPath(srcPath, nameTemplate, pathMapper));
 	});
 });

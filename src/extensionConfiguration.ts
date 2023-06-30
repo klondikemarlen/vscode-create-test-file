@@ -5,7 +5,7 @@ interface IConfig {
 }
 
 const DEFAULT_CONFIG: IConfig = {
-    nameTemplate: '{filename}_spec',
+    nameTemplate: '{filename}_spec.{extension}',
     locationMaps: []
 };
 
