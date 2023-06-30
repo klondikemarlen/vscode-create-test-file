@@ -23,12 +23,72 @@ suite('createTestFile', () => {
 		});
 
 		test('performs a simple file name replacement', async () => {
-			const examplePath = path.join(WORKSPACE_ROOT, './example.rb');
+			const examplePath = path.join(WORKSPACE_ROOT, 'example.rb');
 			const originalUri = vscode.Uri.file(examplePath);
 
 			const newUri = await createTestFile(originalUri);
-			const expected = path.join(WORKSPACE_ROOT, './example.test.rb');
+			const expected = path.join(WORKSPACE_ROOT, 'example.test.rb');
 			assert.equal(expected, newUri.path);
+			assert.ok(fs.existsSync(newUri.path));
+		});
+	});
+
+	suite('when name template is set, and path map is set to a simple pattern', () => {
+		setup(async () => {
+			const config = vscode.workspace.getConfiguration(
+				'createTestFile',
+			);
+			await config.update('nameTemplate', '{filename}.test');
+			await config.update('pathMaps', [
+				{
+					"pathPattern": "/?(.*)",
+					"testFilePathPattern": "spec/$1"
+                },
+			]);
+			await config.update('languages', {});
+
+			const testFileExamplePath = path.join(WORKSPACE_ROOT, 'spec/example.test.rb');
+			fs.unlink(testFileExamplePath, error => null);
+		});
+
+		test('creates the appropriate folder and performs the file name replacement', async () => {
+			const examplePath = path.join(WORKSPACE_ROOT, 'example.rb');
+			const originalUri = vscode.Uri.file(examplePath);
+
+			const newUri = await createTestFile(originalUri);
+			const expected = path.join(WORKSPACE_ROOT, 'spec/example.test.rb');
+			assert.equal(expected, newUri.path);
+			assert.ok(fs.existsSync(newUri.path));
+		});
+	});
+
+	suite('when name template is set, and languages has a name template override', () => {
+		setup(async () => {
+			const config = vscode.workspace.getConfiguration(
+				'createTestFile',
+			);
+			await config.update('nameTemplate', '{filename}.test');
+			await config.update('pathMaps', []);
+			await config.update('languages', {
+				// eslint-disable-next-line @typescript-eslint/naming-convention
+				"[ruby]": {
+					// eslint-disable-next-line @typescript-eslint/naming-convention
+					"createTestFile.nameTemplate": "{filename}_spec"
+				}
+			});
+
+			const testFileExamplePath = path.join(WORKSPACE_ROOT, 'example_spec.rb');
+			fs.unlink(testFileExamplePath, error => null);
+		});
+
+		test('prefers the language specific the file name replacement', async () => {
+			const examplePath = path.join(WORKSPACE_ROOT, 'example.rb');
+			const originalUri = vscode.Uri.file(examplePath);
+
+			const newUri = await createTestFile(originalUri);
+			const expected = path.join(WORKSPACE_ROOT, 'example_spec.rb');
+			assert.equal(expected, newUri.path);
+			assert.ok(fs.existsSync(newUri.path));
 		});
 	});
 });
