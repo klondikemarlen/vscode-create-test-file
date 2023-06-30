@@ -54,7 +54,7 @@
       "properties": {
         "createTestFile.nameTemplate": {
           "type": "string",
-          "default": "test_{filename}",
+          "default": "test_{filename}.{extension}",
           "description": "Template for filename of created test files"
         },
         "createTestFile.pathMaps": {
@@ -82,7 +82,7 @@
               "properties": {
                 "createTestFile.nameTemplate": {
                   "type": "string",
-                  "default": "test_{filename}",
+                  "default": "test_{filename}.{extension}",
                   "description": "Template for filename of created test files"
                 }
               }

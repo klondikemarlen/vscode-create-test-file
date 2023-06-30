@@ -25,14 +25,19 @@ export function findTestFile(srcUri: vscode.Uri): Thenable<vscode.TextDocument> 
 export function testPath(srcPath: string,
                          nameTemplate: string,
                          pathMap?: PathMap): string {
-    let ext = path.extname(srcPath);
-    let file = path.basename(srcPath, ext);
-    let dir = path.dirname(srcPath);
+    let directory = path.dirname(srcPath);
     if (typeof pathMap !== 'undefined') {
-        dir = destPath(dir, pathMap);
+        directory = destPath(directory, pathMap);
     }
-    let testBasename = nameTemplate.replace('{filename}', file) + ext;
-    return path.posix.join(dir, testBasename);
+
+    const extension = path.extname(srcPath);
+    const filename = path.basename(srcPath, extension);
+    let testBasename = nameTemplate.replace('{filename}', filename);
+
+    const extensionWithoutDot = extension.slice(1);
+    testBasename = testBasename.replace('{extension}', extensionWithoutDot);
+
+    return path.posix.join(directory, testBasename);
 }
 
 function inferTestUri(srcUri: vscode.Uri): Thenable<vscode.Uri> {
