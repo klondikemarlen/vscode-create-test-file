@@ -2,7 +2,7 @@
   "name": "create-test-file",
   "displayName": "Create Test File at Path",
   "description": "Find or create empty test file with inferred location",
-  "version": "1.1.0",
+  "version": "2.0.1",
   "publisher": "klondikemarlen",
   "repository": "https://github.com/klondikemarlen/vscode-create-test-file",
   "engines": {
@@ -96,9 +96,13 @@
     "vscode:prepublish": "npm run compile",
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
-    "pretest": "npm run compile && npm run lint",
+    "pretest": "npm run compile && npm run lint && npm run pretest:workspace",
+    "pretest:workspace": "mkdir -p ./out/tmp && cp -r ./src/test/example-workspace ./out/tmp/",
     "lint": "eslint src --ext ts",
-    "test": "node ./out/test/runTest.js"
+    "test": "node ./out/test/runTest.js",
+    "clean": "rm -rf ./out",
+    "clean:tmp": "rm -rf ./out/tmp",
+    "clean:vsix": "rm *.vsix"
   },
   "devDependencies": {
     "@types/vscode": "^1.79.0",
