@@ -96,10 +96,12 @@
     "vscode:prepublish": "npm run compile",
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
-    "pretest": "npm run compile && npm run lint",
+    "pretest": "npm run compile && npm run lint && npm run pretest:workspace",
+    "pretest:workspace": "mkdir -p ./out/tmp && cp -r ./src/test/example-workspace ./out/tmp/",
     "lint": "eslint src --ext ts",
     "test": "node ./out/test/runTest.js",
-    "clean": "rm -rf ./out"
+    "clean": "rm -rf ./out",
+    "clean:tmp": "rm -rf ./out/tmp"
   },
   "devDependencies": {
     "@types/vscode": "^1.79.0",

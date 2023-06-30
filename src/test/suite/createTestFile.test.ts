@@ -6,31 +6,36 @@ import * as fs from 'fs';
 
 import { createTestFile, testPath } from '../../createTestFile';
 
-const WORKSPACE_ROOT = path.resolve(__dirname, '../example-workspace');
+const WORKSPACE_ROOT = path.resolve(__dirname, '../../tmp/example-workspace');
 
 suite('createTestFile', () => {
 	setup(() => {
-		const testFileExamplePath = path.join(WORKSPACE_ROOT, 'test_example.js');
-		return fs.unlink(
-			testFileExamplePath,
-			error => {
-				if (error) {
-				  throw error;
-				}
+		const testFileExamplePath = path.join(WORKSPACE_ROOT, 'test_example.rb');
+		return fs.unlink(testFileExamplePath, error => null);
+	});
 
-				console.log(`${testFileExamplePath} is deleted.`);
-			  }
-		);
+	teardown(() => {
+		const testFileExamplePath = path.join(WORKSPACE_ROOT, 'test_example.rb');
+		return fs.unlink(testFileExamplePath, error => null);
 	});
 
 	test('should create the appropriate a test file', () => {
-		const examplePath = path.join(WORKSPACE_ROOT, './example.js');
-		const originalUri = vscode.Uri.file(examplePath);
+		const config = vscode.workspace.getConfiguration(
+			'createTestFile',
+		);
 
-		return createTestFile(originalUri).then(newUri => {
-			const expected = path.join(WORKSPACE_ROOT, './test_example.js');
-			assert.equal(expected, newUri.path);
+		config.update('nameTemplate', '{filename}.test').then(() => {
+			console.log("config", config);
+
+			const examplePath = path.join(WORKSPACE_ROOT, './example.rb');
+			const originalUri = vscode.Uri.file(examplePath);
+
+			return createTestFile(originalUri).then(newUri => {
+				const expected = path.join(WORKSPACE_ROOT, './test_example.rb');
+				assert.equal(expected, newUri.path);
+			});
 		});
+
 	});
 });
 

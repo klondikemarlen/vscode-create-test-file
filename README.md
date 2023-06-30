@@ -69,8 +69,8 @@ Alternatively, see package.json -> scripts other commands.
 
 ### File Access in Tests
 
-The test config opens the app with `out/test/example-workspace/` as the default workspace.
-File manipulation tests can be performed in this folder.
+The test config opens the app with `./tmp/example-workspace/` as the default workspace.
+File manipulation tests can be performed in this folder. The directory is copied from the project `./src/test/example-workspace` directory as part of the `npm run test` command.
 
 TODO: add information on how to publish.
 
