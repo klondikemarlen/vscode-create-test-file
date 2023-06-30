@@ -21,6 +21,8 @@ If you want workspace specific behavior, this is built in to VSCode itself. You 
 
 ## Extension Settings
 
+For pattern replacement conventions see [Specifying a string as the replacement](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace#specifying_a_string_as_the_replacement)
+
 ```javascript -- instead of json to support comments
 // Basic settings
 "createTestFile.nameTemplate": "{filename}_spec", // If file is named foo.bar, will create test named foo_spec.bar
@@ -29,10 +31,11 @@ If you want workspace specific behavior, this is built in to VSCode itself. You 
         "createTestFile.nameTemplate": "{filename}.test" // For javascript, if file is foo.js, will create foo.test.js
     }
 },
+// NOTE: Only the first rule to match the file path will be used!
+// Rules will be searched in the order they are defined.
 "createTestFile.pathMaps": [
     {
         // Defines rule such that any file under app/ will have a test file created under spec/
-        // Rules will be applied in the order they are defined. The first rule to match the file path will be used.
         "pathPattern": "app/?(.*)?", // Regex file path matcher
         "testFilePathPattern": "spec/$1" // $1, $2, etc. will be replaced with the matching text from the pathPattern
     }
