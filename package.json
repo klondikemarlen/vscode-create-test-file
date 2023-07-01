@@ -9,8 +9,10 @@
     "vscode": "^1.79.0"
   },
   "categories": [
+    "Testing",
     "Other"
   ],
+  "keywords": ["create", "swap", "go", "test", "file"],
   "activationEvents": [],
   "main": "./out/extension.js",
   "contributes": {
