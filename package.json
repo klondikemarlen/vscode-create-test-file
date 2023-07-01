@@ -26,8 +26,8 @@
         "title": "Find Test File"
       },
       {
-        "command": "vscode-create-test-file.helloWorld",
-        "title": "Hello World"
+        "command": "vscode-create-test-file.goToOrFromTest",
+        "title": "Go To or From Test File"
       }
     ],
     "menus": {
@@ -39,6 +39,10 @@
         {
           "command": "vscode-create-test-file.findTestFile",
           "when": "!explorerResourceIsFolder"
+        },
+        {
+          "command": "vscode-create-test-file.goToOrFromTest",
+          "when": "!explorerResourceIsFolder"
         }
       ],
       "editor/title/context": [
@@ -47,6 +51,9 @@
         },
         {
           "command": "vscode-create-test-file.findTestFile"
+        },
+        {
+          "command": "vscode-create-test-file.goToOrFromTest"
         }
       ]
     },
