@@ -19,19 +19,23 @@
     "commands": [
       {
         "command": "vscode-create-test-file.createTestFile",
-        "title": "Create Test File"
+        "title": "Create Test File",
+        "category": "Create Test File"
       },
       {
         "command": "vscode-create-test-file.findTestFile",
-        "title": "Find Test File"
+        "title": "Find Test File",
+        "category": "Create Test File"
       },
       {
         "command": "vscode-create-test-file.goToOrFromTest",
-        "title": "Go To or From Test File"
+        "title": "Go To or From Test File",
+        "category": "Create Test File"
       },
       {
         "command": "vscode-create-test-file.cleanCache",
-        "title": "Clean test to source and source to test lookup cache."
+        "title": "Clean to to or from cache.",
+        "category": "Create Test File"
       }
     ],
     "menus": {
