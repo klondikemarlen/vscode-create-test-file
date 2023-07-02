@@ -2,30 +2,40 @@
   "name": "create-test-file",
   "displayName": "Create Test File at Path",
   "description": "Find or create empty test file with inferred location",
-  "version": "3.0.0",
+  "version": "3.1.0",
   "publisher": "klondikemarlen",
   "repository": "https://github.com/klondikemarlen/vscode-create-test-file",
   "engines": {
     "vscode": "^1.79.0"
   },
   "categories": [
+    "Testing",
     "Other"
   ],
+  "keywords": ["create", "swap", "go", "test", "file"],
   "activationEvents": [],
   "main": "./out/extension.js",
   "contributes": {
     "commands": [
       {
         "command": "vscode-create-test-file.createTestFile",
-        "title": "Create Test File"
+        "title": "Create Test File",
+        "category": "Create Test File"
       },
       {
         "command": "vscode-create-test-file.findTestFile",
-        "title": "Find Test File"
+        "title": "Find Test File",
+        "category": "Create Test File"
       },
       {
-        "command": "vscode-create-test-file.helloWorld",
-        "title": "Hello World"
+        "command": "vscode-create-test-file.goToOrFromTest",
+        "title": "Go To or From Test File",
+        "category": "Create Test File"
+      },
+      {
+        "command": "vscode-create-test-file.cleanCache",
+        "title": "Clean Go to or From Cache",
+        "category": "Create Test File"
       }
     ],
     "menus": {
@@ -37,6 +47,10 @@
         {
           "command": "vscode-create-test-file.findTestFile",
           "when": "!explorerResourceIsFolder"
+        },
+        {
+          "command": "vscode-create-test-file.goToOrFromTest",
+          "when": "!explorerResourceIsFolder"
         }
       ],
       "editor/title/context": [
@@ -45,6 +59,9 @@
         },
         {
           "command": "vscode-create-test-file.findTestFile"
+        },
+        {
+          "command": "vscode-create-test-file.goToOrFromTest"
         }
       ]
     },
@@ -87,6 +104,21 @@
                 }
               }
             }
+          }
+        },
+        "createTestFile.isTestFileMatchers": {
+          "type": "array",
+          "default": [
+            "^(?:test|spec)s?/",
+            "/(?:test|spec)s?/",
+            "/?(?:test|spec)s?_",
+            "/?_(?:test|spec)s?",
+            "/?\\.(?:test|spec)s?",
+            "/?(?:test|spec)s?\\."
+          ],
+          "description": "List of regular expressions used to detect if a file is a test file",
+          "items": {
+            "type": "string"
           }
         }
       }

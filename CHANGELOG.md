@@ -6,6 +6,10 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 ## [Unreleased]
 
+## [3.1.0] - 2023-06-30
+
+- Add support for switching between test and non-test files.
+
 ## [3.0.0] - 2023-06-30
 
 - Added support for filename extension mutation.
