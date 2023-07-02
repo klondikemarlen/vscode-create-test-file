@@ -3,7 +3,6 @@ import * as vscode from 'vscode';
 import { createTestFile } from './createTestFile';
 
 export function goToOrFromTest(extensionContext: vscode.ExtensionContext, sourceUri: vscode.Uri): Thenable<vscode.Uri> {
-
     if (isTestFile(extensionContext, sourceUri)) {
         const destinationUri = goToSource(extensionContext, sourceUri);
         return Promise.resolve(destinationUri);
@@ -43,9 +42,9 @@ export function goToTest(extensionContext: vscode.ExtensionContext, sourceUri: v
         return Promise.resolve(destinationUri);
     }
 
-    return createTestFile(sourceUri).then(destinationUri => {
-        workspaceState.update(`source-to-test-map:${sourceUri.path}`, destinationUri.path);
-        workspaceState.update(`test-to-source-map:${destinationUri.path}`, sourceUri.path);
+    return createTestFile(sourceUri).then(async destinationUri => {
+        await workspaceState.update(`source-to-test-map:${sourceUri.path}`, destinationUri.path);
+        await workspaceState.update(`test-to-source-map:${destinationUri.path}`, sourceUri.path);
         return destinationUri;
     });
 }
