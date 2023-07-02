@@ -44,6 +44,16 @@ For pattern replacement conventions see [Specifying a string as the replacement]
         "pathPattern": "app/?(.*)?", // Regex file path matcher
         "testFilePathPattern": "spec/$1" // $1, $2, etc. will be replaced with the matching text from the pathPattern
     }
+],
+// Matchers that determine whether a file is a test file or not.
+// You probably don't need to edit this, but if you need to you can.
+isTestFileMatchers: [
+    "^(?:test|spec)s?/", // matches paths that start with either "test" or "spec" followed by an optional "s", and finally ending with a forward slash "/"
+    "/(?:test|spec)s?/", // matches paths that have a segment of test(s) or spec(s) and is bracketed with forward slashes "/"
+    "/?(?:test|spec)s?_",  // matches paths that start an optional forward slash "/" then with either "test" or "spec" followed by an optional "s", and finally ending with a _
+    "/?_(?:test|spec)s?", // same as above, but leading "_"
+    "/?\\.(?:test|spec)s?", // same as above but with leading "."
+    "/?(?:test|spec)s?\\." // same as above but with trailing "."
 ]
 ```
 

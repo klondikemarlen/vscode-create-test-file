@@ -97,6 +97,21 @@
               }
             }
           }
+        },
+        "createTestFile.isTestFileMatchers": {
+          "type": "array",
+          "default": [
+            "^(?:test|spec)s?/",
+            "/(?:test|spec)s?/",
+            "/?(?:test|spec)s?_",
+            "/?_(?:test|spec)s?",
+            "/?\\.(?:test|spec)s?",
+            "/?(?:test|spec)s?\\."
+          ],
+          "description": "List of regular expressions used to detect if a file is a test file",
+          "items": {
+            "type": "string"
+          }
         }
       }
     }

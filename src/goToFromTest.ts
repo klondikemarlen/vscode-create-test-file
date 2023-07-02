@@ -21,7 +21,7 @@ export function isTestFile(extensionContext: vscode.ExtensionContext, sourceUri:
         return true;
     }
 
-    return false;
+    return matchesTestFilePattern(sourceUri);
 }
 
 export function goToSource(extensionContext: vscode.ExtensionContext, sourceUri: vscode.Uri): vscode.Uri {
@@ -47,5 +47,16 @@ export function goToTest(extensionContext: vscode.ExtensionContext, sourceUri: v
         workspaceState.update(`source-to-test-map:${sourceUri.path}`, destinationUri.path);
         workspaceState.update(`test-to-source-map:${destinationUri.path}`, sourceUri.path);
         return destinationUri;
+    });
+}
+
+export function matchesTestFilePattern(sourceUri: vscode.Uri): boolean {
+    const config = vscode.workspace.getConfiguration('createTestFile');
+    const isTestFileMatchers = config.get('isTestFileMatchers') as string[];
+
+    const sourcePath = sourceUri.path;
+    return isTestFileMatchers.some((matcher: string) => {
+        const regex = new RegExp(matcher);
+        return regex.test(sourcePath);
     });
 }
