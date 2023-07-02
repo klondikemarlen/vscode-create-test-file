@@ -34,7 +34,7 @@
       },
       {
         "command": "vscode-create-test-file.cleanCache",
-        "title": "Clean to to or from cache.",
+        "title": "Clean Go to or From Cache",
         "category": "Create Test File"
       }
     ],
