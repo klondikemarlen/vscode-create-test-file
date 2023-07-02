@@ -31,7 +31,10 @@ export function goToSource(extensionContext: vscode.ExtensionContext, sourceUri:
         const destinationUri = vscode.Uri.file(destinationPath);
         return destinationUri;
     }
-    vscode.window.showErrorMessage(`Could not find a source file for the test file: ${sourcePath}`);
+    vscode.window.showErrorMessage(
+        `Could not find a source file for the test file: "${sourcePath}".` +
+        ' Try going to the source file, then triggering "Go To or From Test File" and it should work after that.'
+    );
     return sourceUri;
 }
 
