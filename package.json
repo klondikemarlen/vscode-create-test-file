@@ -28,6 +28,10 @@
       {
         "command": "vscode-create-test-file.goToOrFromTest",
         "title": "Go To or From Test File"
+      },
+      {
+        "command": "vscode-create-test-file.cleanCache",
+        "title": "Clean test to source and source to test lookup cache."
       }
     ],
     "menus": {
